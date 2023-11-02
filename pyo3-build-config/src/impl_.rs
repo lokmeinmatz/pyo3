@@ -174,6 +174,8 @@ impl InterpreterConfig {
                     See https://foss.heptapod.net/pypy/pypy/-/issues/3397 for more information."
                 ));
             }
+        } else if self.implementation.is_graalpy() {
+            out.push("cargo:rustc-cfg=GraalPy".to_owned());
         } else if self.abi3 {
             out.push("cargo:rustc-cfg=Py_LIMITED_API".to_owned());
         }
@@ -648,6 +650,7 @@ impl FromStr for PythonVersion {
 pub enum PythonImplementation {
     CPython,
     PyPy,
+    GraalPy
 }
 
 impl PythonImplementation {
@@ -655,13 +658,21 @@ impl PythonImplementation {
     pub fn is_pypy(self) -> bool {
         self == PythonImplementation::PyPy
     }
+    
+    #[doc(hidden)]
+    pub fn is_graalpy(self) -> bool {
+        self == PythonImplementation::GraalPy
+    }
 
     #[doc(hidden)]
     pub fn from_soabi(soabi: &str) -> Result<Self> {
+        println!(">>>>>>>>>>>> from_soabi");
         if soabi.starts_with("pypy") {
             Ok(PythonImplementation::PyPy)
         } else if soabi.starts_with("cpython") {
             Ok(PythonImplementation::CPython)
+        } else if soabi.starts_with("graal") {
+            Ok(PythonImplementation::GraalPy)
         } else {
             bail!("unsupported Python interpreter");
         }
@@ -673,6 +684,7 @@ impl Display for PythonImplementation {
         match self {
             PythonImplementation::CPython => write!(f, "CPython"),
             PythonImplementation::PyPy => write!(f, "PyPy"),
+            PythonImplementation::GraalPy => write!(f, "GraalPy")
         }
     }
 }
@@ -683,6 +695,7 @@ impl FromStr for PythonImplementation {
         match s {
             "CPython" => Ok(PythonImplementation::CPython),
             "PyPy" => Ok(PythonImplementation::PyPy),
+            "GraalVM" | "GraalPy" => Ok(PythonImplementation::GraalPy),
             _ => bail!("unknown interpreter: {}", s),
         }
     }
@@ -1561,6 +1574,9 @@ fn default_lib_name_unix(
             } else {
                 format!("pypy{}-c", version.major)
             }
+        },
+        PythonImplementation::GraalPy => {
+            "pythonvm".into()
         }
     }
 }

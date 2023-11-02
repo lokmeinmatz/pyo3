@@ -1,0 +1,10 @@
+implementation=GraalVM
+version=3.10
+shared=true
+abi3=false
+lib_name=graalpython-embed
+lib_dir=/Users/mkind/Dev/Uni/RE23/graalpython/mxbuild/darwin-aarch64/com.oracle.graal.python.c_embed/aarch64
+executable=/Users/mkind/Dev/Uni/RE23/graal/sdk/mxbuild/darwin-aarch64/PYTHON_NATIVE_STANDALONE_SVM_JAVA22/graalpy-community-24.0.0-dev-macos-aarch64/bin/graalpy
+pointer_width=64
+build_flags=Py_DEBUG,Py_REF_DEBUG
+suppress_build_script_link_lines=false

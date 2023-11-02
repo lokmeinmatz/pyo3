@@ -1,0 +1,32 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug basic graalpy example",
+      "cargo": {
+        "args": [
+          "build",
+          "--manifest-path=${workspaceFolder}/examples/basic_rust_to_py/Cargo.toml"
+        ],
+        "filter": {
+          "kind": "bin",
+          "name": "basic_rust_to_py"
+        },
+        "env": {
+          "PYO3_CONFIG_FILE": "/Users/mkind/Dev/Uni/RE23/pyo3/examples/basic_rust_to_py/graalpy-build-cfg.txt"
+        }
+      },
+      // "program": "${workspaceFolder}/examples/basic_rust_to_py/target/debug/basic_rust_to_py",
+      "args": [],
+      "env": {
+        "PYO3_CONFIG_FILE": "/Users/mkind/Dev/Uni/RE23/pyo3/examples/basic_rust_to_py/graalpy-build-cfg.txt"
+      },
+      "cwd": "${workspaceFolder}/examples/basic_rust_to_py"
+    }
+  ]
+}

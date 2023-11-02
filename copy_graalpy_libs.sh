@@ -1,0 +1,2 @@
+sudo cp /Users/mkind/Dev/Uni/RE23/graal/sdk/mxbuild/darwin-aarch64/libpythonvm.dylib.image/libpythonvm.dylib /usr/local/lib/
+sudo cp /Users/mkind/Dev/Uni/RE23/graalpython/mxbuild/darwin-aarch64/GRAALPYTHON_NATIVE_LIBS/darwin/aarch64/libpython-native.dylib /usr/local/lib/

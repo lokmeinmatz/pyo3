@@ -85,7 +85,8 @@ pub fn prepare_freethreaded_python() {
     // concurrent initialization of the Python runtime by other users of the Python C API.
     START.call_once_force(|_| unsafe {
         // Use call_once_force because if initialization panics, it's okay to try again.
-        if ffi::Py_IsInitialized() == 0 {
+        let init_state = ffi::Py_IsInitialized();
+        if init_state == 0 {
             ffi::Py_InitializeEx(0);
 
             // Release the GIL.

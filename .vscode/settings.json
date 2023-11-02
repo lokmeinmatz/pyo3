@@ -1,0 +1,9 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./examples/basic_rust_to_py/Cargo.toml"
+  ],
+  "rust-analyzer.cargo.buildScripts.enable": false,
+  "rust-analyzer.cargo.cfgs": {
+    "GraalPy": ""
+  }
+}

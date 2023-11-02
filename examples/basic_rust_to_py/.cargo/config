@@ -1,0 +1,7 @@
+[target.aarch64-apple-darwin]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+   "-L", "native=/Users/mkind/Dev/Uni/RE23/graalpython/mxbuild/darwin-aarch64/com.oracle.graal.python.cext/aarch64/bin",
+   "-l", "python-native"
+]
